@@ -1,22 +1,25 @@
 #création polyominos
 #lasnelus
 
-L = [[0,1],[1,1],[2,1],[2,0]] #piece de tetris formant un L orienté vers la droite de 3 de haut, pour 2 de large
+from affichage_piece import *
+L = [[0,0],[1,0],[2,0],[2,1]] #piece de tetris formant un L orienté vers la droite de 3 de haut, pour 2 de large
 
 def rotationPiece(piece: list)-> list:
     """
-    permet de faire la rotation de 90° vers la ... d'un polyomino
+    permet de faire la rotation de 90° vers la droite d'un polyomino
     """
     nouvellePiece = []
     for i in range(len(piece)):
         nouvellePiece += [[-(piece[i][1]), piece[i][0]]]
 
-    config = open("piece.txt", "w")
-    config.write(str(nouvellePiece))
-    config.close()
+    min_x = min(coord[0] for coord in nouvellePiece)
+    min_y = min(coord[1] for coord in nouvellePiece)
+
+    nouvellePiece = [[x - min_x, y - min_y] for x, y in nouvellePiece]
     return nouvellePiece
 
-rotationPiece(L)
+
+affichageNouvellePiece(rotationPiece(L))
 def symetriePiece():
     """
     permet de faire la symetrie d'un polyomino
