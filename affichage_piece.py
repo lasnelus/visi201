@@ -1,11 +1,8 @@
 #affichage piece
 #lasnelus
 
-def affichageNouvellePiece (pieces:list)->None:
-    """
-    permet l'affichage d'un nouvelle piece dans un fichier txt
-    """
-    baseAffichage = [[".",".",".",".",".",".",".",".",".","."],
+
+baseAffichage = [[".",".",".",".",".",".",".",".",".","."],
                      [".",".",".",".",".",".",".",".",".","."],
                      [".",".",".",".",".",".",".",".",".","."],
                      [".",".",".",".",".",".",".",".",".","."],
@@ -15,6 +12,11 @@ def affichageNouvellePiece (pieces:list)->None:
                      [".",".",".",".",".",".",".",".",".","."],
                      [".",".",".",".",".",".",".",".",".","."],
                      [".",".",".",".",".",".",".",".",".","."]]
+def affichageNouvellePiece (pieces:list)->None:
+    """
+    permet l'affichage d'un nouvelle piece dans un fichier txt
+    """
+
     for i in range(len(pieces)):
         lettres ="abcdefghijklmnopqrstuvwxyz"
         for j in range(len(pieces[i])):
