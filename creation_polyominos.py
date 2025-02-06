@@ -19,9 +19,12 @@ def rotationPiece(piece: list)-> list:
     return nouvellePiece
 
 
-affichageNouvellePiece(rotationPiece(L))
-def symetriePiece():
+def symetriePiece(piece:list)->list:
     """
     permet de faire la symetrie d'un polyomino
     """
-    return
+    max_y = max(y for _, y in piece)  # Trouve la plus grande valeur de Y
+
+    return [[x, max_y - y] for x, y in piece]
+
+#affichageNouvellePiece([symetriePiece(L)])

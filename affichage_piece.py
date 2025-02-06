@@ -1,15 +1,24 @@
 #affichage piece
 #lasnelus
 
-def affichageNouvellePiece (piece:list)->None:
+def affichageNouvellePiece (pieces:list)->None:
     """
     permet l'affichage d'un nouvelle piece dans un fichier txt
     """
-    baseAffichage = [[".",".","."],
-                     [".",".","."],
-                     [".",".","."]]
-    for i in range(len(piece)):
-        baseAffichage[piece[i][0]][piece[i][1]] = "a"
+    baseAffichage = [[".",".",".",".",".",".",".",".",".","."],
+                     [".",".",".",".",".",".",".",".",".","."],
+                     [".",".",".",".",".",".",".",".",".","."],
+                     [".",".",".",".",".",".",".",".",".","."],
+                     [".",".",".",".",".",".",".",".",".","."],
+                     [".",".",".",".",".",".",".",".",".","."],
+                     [".",".",".",".",".",".",".",".",".","."],
+                     [".",".",".",".",".",".",".",".",".","."],
+                     [".",".",".",".",".",".",".",".",".","."],
+                     [".",".",".",".",".",".",".",".",".","."]]
+    for i in range(len(pieces)):
+        lettres ="abcdefghijklmnopqrstuvwxyz"
+        for j in range(len(pieces[i])):
+            baseAffichage[pieces[i][j][0]][pieces[i][j][1]] = lettres[i]
 
 
     visualisation = open("piece.txt", "w")
@@ -17,4 +26,13 @@ def affichageNouvellePiece (piece:list)->None:
         visualisation.write(" ".join(ligne) + "\n")
     visualisation.close()
 
-affichageNouvellePiece([[0,0],[1,0],[2,0],[2,1]])
+"""
+affichageNouvellePiece(
+                       [
+                        [
+                         [0,0],[1,0],[2,0],[2,1]],
+                        [
+                         [0,2],[1,2],[2,2],[2,3]],
+                        ]
+                        )
+"""
