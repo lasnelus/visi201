@@ -18,7 +18,7 @@ def rotationPiece(piece: list)-> list:
     nouvellePiece = [[x - min_x, y - min_y] for x, y in nouvellePiece]
     return nouvellePiece
 
-
+affichageNouvellePiece([rotationPiece(L)])
 def symetriePiece(piece:list)->list:
     """
     permet de faire la symetrie d'un polyomino
