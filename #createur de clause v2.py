@@ -5,6 +5,17 @@ from creation_polyominos import *
 
 piece = [[0,0],[1,0],[2,0],[2,1]]
 
+def creation_tab(longueur:int, hauteur:int)-> list:
+    """
+    créer un tableau de hauteur et longueur données
+    """
+    res = []
+    for i in range(hauteur):
+        contenue = []
+        for j in range(longueur):
+            contenue+= "."
+        res+=[contenue]
+    return res
 
 def trouve_origine (piece:list) -> list:
     """
@@ -54,31 +65,41 @@ def version_possible(case: list, piece: list, tab: list) -> list:
                 break
         
         if valide:
-            res += version
+            res += [version]
     return res
 
-def creation_clause_case(case:list, piece:list, tab: list)  -> list:
+def creation_clause_case(case:list, piece:list, tab: list) -> list:
     """
     créer les clauses pour toutes les pièces possible sur une case
     """
-    
-res =""
-for version in range(len(versionpiece)):
-    origine = trouve_origine(versionpiece[version])
-    for case in versionpiece[version]:
-        x_case_actuel= case[0]
-        y_case_actuel= case[1]
-        part1 = "~X_"+ str(x_case_actuel)+"_"+str(y_case_actuel)+"_"+str(origine[0])+"_"+str(origine[1])+"_"+str(version)+" "
-        for i in range(len(versionpiece[version])):
-            if versionpiece[version][i] == case:
-                continue
-            x_case_2= versionpiece[version][i][0]
-            y_case_2= versionpiece[version][i][1]
-            part2 = "X_"+str(x_case_2)+"_"+str(y_case_2)+"_"+str(origine[0])+"_"+str(origine[1])+"_"+str(version)+"\n"
-            res += part1+part2
+    res =""
+    versionpiece = version_possible(case, piece, tab)
+    for version in range(len(versionpiece)):
+        origine = trouve_origine(versionpiece[version])
+        for case in versionpiece[version]:
+            x_case_actuel= case[0]
+            y_case_actuel= case[1]
+            part1 = "~X_"+ str(x_case_actuel)+"_"+str(y_case_actuel)+"_"+str(origine[0])+"_"+str(origine[1])+"_"+str(version)+" "
+            for i in range(len(versionpiece[version])):
+                if versionpiece[version][i] == case:
+                    continue
+                x_case_2= versionpiece[version][i][0]
+                y_case_2= versionpiece[version][i][1]
+                part2 = "X_"+str(x_case_2)+"_"+str(y_case_2)+"_"+str(origine[0])+"_"+str(origine[1])+"_"+str(version)+"\n"
+                res += part1+part2
+    return res
 
+def creation_clause_tab (piece:list, tab:list):
+    """
+    créer les clauses pour la totalité du tableau
+    """
+    res=""
+    for hauteur in range(len(tab)):
+        for longueur in range(len(tab[0])):
+            res += creation_clause_case([longueur, hauteur], piece, tab)
 
+    clause = open("clausepavage.txt", "w")
+    clause.write(res)
+    clause.close()
 
-clause = open("clausepavage.txt", "w")
-clause.write(res)
-clause.close()
+creation_clause_tab(piece, creation_tab(10, 10))
