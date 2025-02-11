@@ -16,9 +16,21 @@ def clausesL (tab)-> str:
     #1
     for i in range(len(tab)-2):
         for j in range(len(tab[i])-1):
-            res+= "~X_"+str(i)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+(str(i+1))+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
-            res+= "~X_"+str(i)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str((i+2))+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
-            res+= "~X_"+str(i)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str((i+2))+"_"+str((j+1))+"_"+str(i)+"_"+str(j)+"_1\n"
+            res+= "~X_"+str(i)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i+1)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
+            res+= "~X_"+str(i)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i+2)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
+            res+= "~X_"+str(i)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i+2)+"_"+str(j+1)+"_"+str(i)+"_"+str(j)+"_1\n"
+
+            res+= "~X_"+str(i+1)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
+            res+= "~X_"+str(i+1)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i+2)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
+            res+= "~X_"+str(i+1)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i+2)+"_"+str(j+1)+"_"+str(i)+"_"+str(j)+"_1\n"
+   
+            res+= "~X_"+str(i+2)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
+            res+= "~X_"+str(i+2)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i+1)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
+            res+= "~X_"+str(i+2)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i+2)+"_"+str(j+1)+"_"+str(i)+"_"+str(j)+"_1\n"
+
+            res+= "~X_"+str(i+2)+"_"+str(j+1)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
+            res+= "~X_"+str(i+2)+"_"+str(j+1)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i+1)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
+            res+= "~X_"+str(i+2)+"_"+str(j+1)+"_"+str(i)+"_"+str(j)+"_1 X_"+str(i+2)+"_"+str(j)+"_"+str(i)+"_"+str(j)+"_1\n"
 
             #done
     #2

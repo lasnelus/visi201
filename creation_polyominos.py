@@ -26,4 +26,4 @@ def symetriePiece(piece:list)->list:
 
     return [[x, max_y - y] for x, y in piece]
 
-affichageNouvellePiece([rotationPiece(rotationPiece(rotationPiece(L)))])
+affichageNouvellePiece([L])
