@@ -15,8 +15,8 @@ def lecteur_tab (file: str)-> list:
     print(res)
     return res
 
-def nouveaux_verif ()
-    
+def nouveaux_verif ():
+    return
 
 def version_possible(case: list, piece: list, tab: list) -> list:
     """
