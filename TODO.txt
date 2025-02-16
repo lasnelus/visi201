@@ -1,0 +1,11 @@
+TODO
+
+
+créeation systeme de clause, piece, case
+
+Px_version_originex_originey
+
+C_x_y
+
+création systeme de lecture de fichier pour tab, "#= case utilisable, &=case inutilisable."
+nouveau vérificateur
