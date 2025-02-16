@@ -1,14 +1,5 @@
 import subprocess
 
-
-def creationClauses()-> None:
-    """
-    création de clauses pour le solveur SAT13,
-    """
-    config = open("instructionSAT13.txt", "w")
-    config.write()
-    config.close()
-
 def execSAT13 (file: str) -> str:
     """execute le """
     res = subprocess.run("./sat13.exe <" + file, shell=True, capture_output=True, text=True)
