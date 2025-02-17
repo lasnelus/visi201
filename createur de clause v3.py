@@ -122,6 +122,37 @@ def creation_contrainte_unicite(tab: list, piece: list) -> str:
 
     return res
 
+def creation_contrainte_couverture(tab: list, piece: list) -> str:
+    """
+    Génère les clauses imposant que chaque case soit occupée par au moins une pièce.
+    """
+    res = ""
+    case_occupees = {}  # Dictionnaire des cases -> Liste des pièces qui les couvrent
+
+    for origine in tab:
+        versions_valides = verif_version(origine, piece, tab)
+        for i, version in enumerate(versions_valides):
+            for case in version:
+                key = (case[0], case[1])
+                if key not in case_occupees:
+                    case_occupees[key] = []
+                case_occupees[key].append(f"P{i}_{origine[0]}_{origine[1]}")
+
+    # Générer les clauses de couverture (chaque case doit être couverte)
+    for case, pieces in case_occupees.items():
+        res += " ".join(pieces) + " 0\n"  # CNF : Au moins une de ces pièces est présente
+
+    return res
+
+def creation_clause_complet (tab:list)->str:
+    """
+    créé toutes les clauses pour que chaque case soit utilisé
+    """
+    res=""
+    for case in tab:
+        res += "C_"+str(case[0])+"_"+str(case[1])+"\n"
+    return res
+
 def ecriture_clause (clause: str)-> None:
     """
     écrit dans un fichier les clauses
@@ -132,5 +163,7 @@ def ecriture_clause (clause: str)-> None:
 
 ecriture_clause(
     str(creation_clause_tab(piece, lecteur_tab("tab.txt"))) +
-    str(creation_contrainte_unicite(lecteur_tab("tab.txt"), piece))
+    str(creation_clause_complet(lecteur_tab("tab.txt"))) +
+    str(creation_contrainte_unicite(lecteur_tab("tab.txt"), piece)) +
+    str(creation_contrainte_couverture(lecteur_tab("tab.txt"), piece))
 )
