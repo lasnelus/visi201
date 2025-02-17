@@ -6,7 +6,15 @@ def execSAT13 (file: str) -> str:
     print(res)
     return str(res.stdout)
     
-
+def ecriture_fichier (file:str):
+    """
+    écrit les résultat du SAT solver dans un fichier a part
+    """
+    fichier = open("resSAT13.txt", "w")
+    fichier.write(execSAT13(file))
+    fichier.close()
+    
+    
 def miseEnForme (file:str) -> None:
     output = execSAT13(file)
     resultat=[0,0,0,0,0,0]
@@ -17,9 +25,7 @@ def miseEnForme (file:str) -> None:
     print(resultat)
     for i in range(len(resultat)):
         res += str(resultat[i])
-    sol = open("resSAT13.txt", "w")
-    sol.write(str(res))
-    sol.close()
+    return res
 
 
-miseEnForme("new_try.txt")
+ecriture_fichier("clausepavage.txt")

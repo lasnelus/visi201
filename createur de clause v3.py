@@ -1,5 +1,6 @@
 from creation_polyominos import *
 
+piece = [[0,0],[1,0],[2,0],[2,1]]
 
 def lecteur_tab (file: str)-> list:
     """
@@ -11,11 +12,10 @@ def lecteur_tab (file: str)-> list:
     i = 0
     while ligne != "":
         for j in range(len(ligne)):
-            if ligne[i] == "#":
+            if ligne[j] == "#":
                 res.append([j, i])
         ligne = fichier.readline()
         i+=1
-    print(res)
     return res
 
 def trouve_origine (piece:list) -> list:
@@ -49,6 +49,7 @@ def verif_version (origine: list, piece: list, tab: list)-> list:
     """
     vérifie si les version d'une pièce possible pour une origine donnée sont possible
     """
+    res = []
     piece_placé = placement_piece(origine, piece)
     versionpiece = [
         piece_placé,
@@ -78,12 +79,11 @@ def creation_clause_origine(origine:list, piece:list, tab: list) -> str:
     """
     res =""
     versionpiece = verif_version(origine, piece, tab)
-    for version in versionpiece:
-        for case in version:
-            part1 = "~P"+str(version)+str(origine[0])+"_"+str(origine[1])+" "
-            for i in range(len(versionpiece[version])):
-                part2 = "C_"+str(case[0])+"_"+str(case[1])+"\n"
-                res += part1+part2
+    for i in range(len(versionpiece)):
+        for case in versionpiece[i]:
+            part1 = "~P"+str(i)+"_"+str(origine[0])+"_"+str(origine[1])+" "
+            part2 = "C_"+str(case[0])+"_"+str(case[1])+"\n"
+            res += part1+part2
     return res
 
 
@@ -94,7 +94,6 @@ def creation_clause_tab (piece:list, tab:list)->str:
     res=""
     for case in tab:
         res += creation_clause_origine([case[0], case[1]], piece, tab)
-    
     return res
 
 def creation_clause_complet (tab:list)->str:
@@ -105,3 +104,14 @@ def creation_clause_complet (tab:list)->str:
     for case in tab:
         res += "C_"+str(case[0])+"_"+str(case[1])+"\n"
     return res
+
+def ecriture_clause (clause: str)-> None:
+    """
+    écrit dans un fichier les clauses
+    """
+    fichier = open("clausepavage.txt", "w")
+    fichier.write(clause)
+    fichier.close()
+
+
+ecriture_clause(str(creation_clause_tab(piece, lecteur_tab("tab.txt")))+str(creation_clause_complet(lecteur_tab("tab.txt"))))
