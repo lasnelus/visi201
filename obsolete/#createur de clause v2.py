@@ -68,7 +68,7 @@ def version_possible(case: list, piece: list, tab: list) -> list:
             res += [version]
     return res
 
-def creation_clause_case(case:list, piece:list, tab: list) -> list:
+def creation_clause_case(case:list, piece:list, tab: list) -> str:
     """
     créer les clauses pour toutes les pièces possible sur une case
     """

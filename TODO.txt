@@ -3,7 +3,7 @@ TODO
 
 créeation systeme de clause, piece, case
 
-Px_version_originex_originey
+Pversion_originex_originey
 
 C_x_y
 
