@@ -42,8 +42,8 @@ def placement_piece (origine: list, piece: list)->list:
     res=[]
     for case in piece:
         res.append([case[0]+origine[0], case[1]+origine[1]])
-    return res
 
+    return res
 
 def verif_version (origine: list, piece: list, tab: list)-> list:
     """
