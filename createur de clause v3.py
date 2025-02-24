@@ -96,6 +96,19 @@ def creation_clause_tab (piece:list, tab:list)->str:
         res += creation_clause_origine([case[0], case[1]], piece, tab)
     return res
 
+def piece_couvrante(case: list, piece: list, tab: list) -> list:
+    """
+    Retourne la liste de toutes les pièces pouvant recouvrir une case donnée.
+    """
+    case_occupees = []  # Liste des pièces pouvant couvrir la case
+    
+    for origine in tab:
+        versions_valides = verif_version(origine, piece, tab)
+        for i, version in enumerate(versions_valides):
+            if case in version:
+                case_occupees.append(f"P{i}_{origine[0]}_{origine[1]}")
+    
+    return case_occupees
 
 
 def creation_contrainte_unicite(tab: list, piece: list) -> str:
@@ -103,23 +116,13 @@ def creation_contrainte_unicite(tab: list, piece: list) -> str:
     Crée les clauses interdisant qu'une case soit occupée par plus d'une pièce.
     """
     res = ""
-    case_occupees = {} #cictionnaire ou toute les piece pouvant recouvrir une case sont stocké
-
-    for origine in tab:
-        versions_valides = verif_version(origine, piece, tab)
-        for i, version in enumerate(versions_valides):
-            for case in version:
-                key = (case[0], case[1])
-                if key not in case_occupees:
-                    case_occupees[key] = []
-                case_occupees[key].append(f"P{i}_{origine[0]}_{origine[1]}")
-
-
-    for case, pieces in case_occupees.items():
+    
+    for case in tab:
+        pieces = piece_couvrante(case, piece, tab)
         for i in range(len(pieces)):
             for j in range(i + 1, len(pieces)):
                 res += f"~{pieces[i]} ~{pieces[j]}\n"  # Pas deux pièces sur la même case
-
+    
     return res
 
 def creation_contrainte_couverture(tab: list, piece: list) -> str:
@@ -127,22 +130,14 @@ def creation_contrainte_couverture(tab: list, piece: list) -> str:
     Génère les clauses imposant que chaque case soit occupée par au moins une pièce.
     """
     res = ""
-    case_occupees = {}  # Dictionnaire des cases -> Liste des pièces qui les couvrent
-
-    for origine in tab:
-        versions_valides = verif_version(origine, piece, tab)
-        for i, version in enumerate(versions_valides):
-            for case in version:
-                key = (case[0], case[1])
-                if key not in case_occupees:
-                    case_occupees[key] = []
-                case_occupees[key].append(f"P{i}_{origine[0]}_{origine[1]}")
-
-    # Générer les clauses de couverture (chaque case doit être couverte)
-    for case, pieces in case_occupees.items():
-        res += " ".join(pieces) + " 0\n"  # CNF : Au moins une de ces pièces est présente
-
+    
+    for case in tab:
+        pieces = piece_couvrante(case, piece, tab)
+        if pieces:
+            res += " ".join(pieces) + "\n"  # CNF : Au moins une de ces pièces est présente
+    
     return res
+
 
 def creation_clause_complet (tab:list)->str:
     """
