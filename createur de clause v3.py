@@ -1,6 +1,6 @@
 from creation_polyominos import *
 
-piece = [[0,0],[1,0],[2,0],[2,1]]
+piece = [[0,0],[0,1],[0,2],[1,2]]
 
 def lecteur_tab (file: str)-> list:
     """
@@ -44,6 +44,11 @@ def placement_piece (origine: list, piece: list)->list:
         res.append([case[0]+origine[0], case[1]+origine[1]])
 
     return res
+
+assert(placement_piece([0,0], [[0,0],[1,0],[2,0],[2,1]])==[[0,0],[1,0],[2,0],[2,1]])
+assert(placement_piece([1,0], [[0,0],[1,0],[2,0],[2,1]])==[[1,0],[2,0],[3,0],[3,1]])
+assert(placement_piece([0,1], [[0,0],[0,1],[0,2],[1,2]])==[[0,1],[0,2],[0,3],[1,3]])
+
 
 def verif_version (origine: list, piece: list, tab: list)-> list:
     """
