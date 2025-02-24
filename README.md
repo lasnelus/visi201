@@ -13,4 +13,8 @@ On peut retrouver dans ce projet:
     * trouve_origine, renvoie la case la plus en haut et à gauche, dans un rectangle le plus petit possible englobant la piece.
     * placemement_piece, nous permet de connaitre les coordonnées de toutes les cases d'un polyomino d'on on connait l'origine, et la version.
     * verif_version, nous permet de connaitre toute les versions de la piece possible à une origine donnée
-    *  
+    * creation_clause_origine, créer les clauses SAT13 pour toutes les pieces possible à une origine donnée.
+    * creation_clause_complet, créer les clauses SAT13 pour que toutes les cases soit occupé.
+    * ecriture_clause, permet d'écrire les clauses dans le fichier clausespavage.txt
+
+
