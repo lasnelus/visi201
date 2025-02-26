@@ -1,0 +1,16 @@
+def version_piece (piece: list)-> list:
+    """
+    créer une liste de liste, où toute les versions la piece sont stocké
+    """
+    versionpiece = [
+        piece,
+        rotationPiece(piece),
+        rotationPiece(rotationPiece(piece)),
+        rotationPiece(rotationPiece(rotationPiece(piece))),
+        symetriePiece(piece),
+        rotationPiece(symetriePiece(piece)),
+        rotationPiece(rotationPiece(symetriePiece(piece))),
+        rotationPiece(rotationPiece(rotationPiece(symetriePiece(piece))))
+    ]
+
+    return versionpiece

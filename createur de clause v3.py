@@ -16,6 +16,7 @@ def lecteur_tab (file: str)-> list:
                 res.append([j, i])
         ligne = fichier.readline()
         i+=1
+    
     return res
 
 def trouve_origine (piece:list) -> list:
@@ -50,45 +51,59 @@ assert(placement_piece([1,0], [[0,0],[1,0],[2,0],[2,1]])==[[1,0],[2,0],[3,0],[3,
 assert(placement_piece([0,1], [[0,0],[0,1],[0,2],[1,2]])==[[0,1],[0,2],[0,3],[1,3]])
 
 
-def verif_version (origine: list, piece: list, tab: list)-> list:
+def version_piece (piece: list)-> list:
     """
-    vérifie si les version d'une pièce possible pour une origine donnée sont possible
+    créer une liste de liste, où toute les versions la piece sont stocké
+    """
+    versionpiece = [
+        piece,
+        rotationPiece(piece),
+        rotationPiece(rotationPiece(piece)),
+        rotationPiece(rotationPiece(rotationPiece(piece))),
+        symetriePiece(piece),
+        rotationPiece(symetriePiece(piece)),
+        rotationPiece(rotationPiece(symetriePiece(piece))),
+        rotationPiece(rotationPiece(rotationPiece(symetriePiece(piece))))
+    ]
+
+    return versionpiece
+
+def verif_version (origine: list, pieces: list, tab: list) -> list:
+    """
+    verifie les versions valide pour chaque origine
     """
     res = []
-    piece_placé = placement_piece(origine, piece)
-    versionpiece = [
-        piece_placé,
-        rotationPiece(piece_placé),
-        rotationPiece(rotationPiece(piece_placé)),
-        rotationPiece(rotationPiece(rotationPiece(piece_placé))),
-        symetriePiece(piece_placé),
-        rotationPiece(symetriePiece(piece_placé)),
-        rotationPiece(rotationPiece(symetriePiece(piece_placé))),
-        rotationPiece(rotationPiece(rotationPiece(symetriePiece(piece_placé))))
-    ]
     
-    for version in versionpiece:
+    for version in pieces:
+        version_placee = placement_piece(origine, version)  # On place la pièce avant
         valide = True
-        for dx, dy in version:
+        for dx, dy in version_placee:  # Vérifie les cases placées
             if not([dx, dy] in tab):
                 valide = False
                 break
-        
+
         if valide:
-            res += [version]
+            res.append(version_placee)  # On ajoute la version bien placée
     return res
+
+
 
 def creation_clause_origine(origine:list, piece:list, tab: list) -> str:
     """
     créer les clauses pour toutes les pièces possible sur une case
     """
     res =""
-    versionpiece = verif_version(origine, piece, tab)
-    for i in range(len(versionpiece)):
-        for case in versionpiece[i]:
-            part1 = "~P"+str(i)+"_"+str(origine[0])+"_"+str(origine[1])+" "
-            part2 = "C_"+str(case[0])+"_"+str(case[1])+"\n"
-            res += part1+part2
+    versions_valides = verif_version(origine, version_piece(piece), tab)
+
+    print(f"Origine testée : {origine}")
+    for i, version in enumerate(versions_valides):
+        print(f"Version {i} : {version}")
+        for case in version:
+            part1 = f"~P{i}_{origine[0]}_{origine[1]} "
+            part2 = f"C_{case[0]}_{case[1]}\n"
+            res += part1 + part2
+        print(f"Version {i} placée : {version}")
+
     return res
 
 
@@ -108,7 +123,7 @@ def piece_couvrante(case: list, piece: list, tab: list) -> list:
     case_occupees = []  # Liste des pièces pouvant couvrir la case
     
     for origine in tab:
-        versions_valides = verif_version(origine, piece, tab)
+        versions_valides = verif_version(origine, version_piece(piece), tab)
         for i, version in enumerate(versions_valides):
             if case in version:
                 case_occupees.append(f"P{i}_{origine[0]}_{origine[1]}")
