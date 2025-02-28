@@ -15,7 +15,7 @@ def ecriture_fichier (file:str):
     fichier.close()
     
     
-def miseEnForme (file:str) -> None:
+def miseEnForme (file:str, tab:list) -> None:
     output = execSAT13(file)
     resultat=[0,0,0,0,0,0]
     res=""
