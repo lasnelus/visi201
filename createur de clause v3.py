@@ -61,43 +61,37 @@ def version_piece (piece: list)-> list:
 
     return versionpiece
 
-def verif_version (origine: list, pieces: list, tab: list) -> list:
+def verif_version(origine: list, pieces: list, tab: list) -> list:
     """
-    verifie les versions valide pour chaque origine
+    Vérifie les versions valides pour chaque origine et conserve leurs indices d'origine.
     """
     res = []
     
-    for version in pieces:
-        version_placee = placement_piece(origine, version)  # On place la pièce avant
-        valide = True
-        for dx, dy in version_placee:  # Vérifie les cases placées
-            if not([dx, dy] in tab):
-                valide = False
-                break
-
-        if valide:
-            res.append(version_placee)  # On ajoute la version bien placée
+    for i, version in enumerate(pieces):  # On conserve l'index d'origine
+        version_placee = placement_piece(origine, version)
+        if all([dx, dy] in tab for dx, dy in version_placee):  # Vérifie si toutes les cases sont valides
+            res.append((i, version_placee))  # On stocke l'index original et la version placée
+    
     return res
 
 
 
-def creation_clause_origine(origine:list, piece:list, tab: list) -> str:
+def creation_clause_origine(origine: list, piece: list, tab: list) -> str:
     """
-    créer les clauses pour toutes les pièces possible sur une case
+    Crée les clauses pour toutes les pièces possibles sur une case.
     """
-    res =""
+    res = ""
     versions_valides = verif_version(origine, version_piece(piece), tab)
 
     print(f"Origine testée : {origine}")
-    for i, version in enumerate(versions_valides):
-        print(f"Version {i} : {version}")
+    for index_original, version in versions_valides:  # On récupère l'index original
         for case in version:
-            part1 = f"~P{i}_{origine[0]}_{origine[1]} "
+            part1 = f"~P{index_original}_{origine[0]}_{origine[1]} "
             part2 = f"C_{case[0]}_{case[1]}\n"
             res += part1 + part2
-        print(f"Version {i} placée : {version}")
 
     return res
+
 
 
 def creation_clause_tab (piece:list, tab:list)->str:
