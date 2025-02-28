@@ -83,7 +83,6 @@ def creation_clause_origine(origine: list, piece: list, tab: list) -> str:
     res = ""
     versions_valides = verif_version(origine, version_piece(piece), tab)
 
-    print(f"Origine testée : {origine}")
     for index_original, version in versions_valides:  # On récupère l'index original
         for case in version:
             part1 = f"~P{index_original}_{origine[0]}_{origine[1]} "
@@ -105,17 +104,18 @@ def creation_clause_tab (piece:list, tab:list)->str:
 
 def piece_couvrante(case: list, piece: list, tab: list) -> list:
     """
-    Retourne la liste de toutes les pièces pouvant recouvrir une case donnée.
+    Retourne la liste des identifiants des pièces pouvant recouvrir une case donnée.
     """
-    case_occupees = []  # Liste des pièces pouvant couvrir la case
+    case_occupees = []
     
     for origine in tab:
         versions_valides = verif_version(origine, version_piece(piece), tab)
-        for i, version in enumerate(versions_valides):
+        for index_original, version in versions_valides:
             if case in version:
-                case_occupees.append(f"P{i}_{origine[0]}_{origine[1]}")
+                case_occupees.append(f"P{index_original}_{origine[0]}_{origine[1]}")
     
     return case_occupees
+
 
 
 def creation_contrainte_unicite(tab: list, piece: list) -> str:
@@ -126,11 +126,13 @@ def creation_contrainte_unicite(tab: list, piece: list) -> str:
     
     for case in tab:
         pieces = piece_couvrante(case, piece, tab)
-        for i in range(len(pieces)):
-            for j in range(i + 1, len(pieces)):
-                res += f"~{pieces[i]} ~{pieces[j]}\n"  # Pas deux pièces sur la même case
+        if len(pieces) > 1:  # S'il y a au moins deux pièces, on impose des contraintes
+            for i in range(len(pieces)):
+                for j in range(i + 1, len(pieces)):
+                    res += f"~{pieces[i]} ~{pieces[j]}\n"  # Pas deux pièces sur la même case
     
     return res
+
 
 def creation_contrainte_couverture(tab: list, piece: list) -> str:
     """
