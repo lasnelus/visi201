@@ -12,6 +12,7 @@ def lecteur_tab (file: str)-> list:
     i = 0
     while ligne != "":
         for j in range(len(ligne)):
+            ligne.strip()
             if ligne[j] == "#":
                 res.append([j, i])
         ligne = fichier.readline()
@@ -23,16 +24,8 @@ def trouve_origine (piece:list) -> list:
     """
     trouve le point en haut à gauche d'une pièce (sont origine)
     """
-    x_origine = piece[0][0]
-    y_origine = piece[0][1]
-    for case in piece:
-        x_case_actuel = case[0]
-        y_case_actuel = case[1]
-        if x_case_actuel < x_origine:
-            x_origine = x_case_actuel
-        if y_case_actuel < y_origine:
-            y_origine = y_case_actuel
-
+    x_origine = min(x for x, _ in piece)
+    y_origine = min(y for _, y in piece)
     return [x_origine, y_origine]
 
 
@@ -176,9 +169,11 @@ def ecriture_clause (clause: str)-> None:
     fichier.write(clause)
     fichier.close()
 
+tab = lecteur_tab("tab.txt")
+
 ecriture_clause(
-    str(creation_clause_tab(piece, lecteur_tab("tab.txt"))) +
-    str(creation_clause_complet(lecteur_tab("tab.txt"))) +
-    str(creation_contrainte_unicite(lecteur_tab("tab.txt"), piece)) +
-    str(creation_contrainte_couverture(lecteur_tab("tab.txt"), piece))
+    creation_clause_tab(piece, tab) +
+    creation_clause_complet(tab) +
+    creation_contrainte_unicite(tab, piece) +
+    creation_contrainte_couverture(tab, piece)
 )
