@@ -43,16 +43,31 @@ def recupere_list_coordonne (nomfichier):
         origine = recuperation_origine(piecestr[i])
         tab.append(placement_piece(origine, versions_piece[version]))
     return tab
-baseAffichage = [    [".",".",".",".",".",".",".",".",".","."],
-                     [".",".",".",".",".",".",".",".",".","."],
-                     [".",".",".",".",".",".",".",".",".","."],
-                     [".",".",".",".",".",".",".",".",".","."],
-                     [".",".",".",".",".",".",".",".",".","."],
-                     [".",".",".",".",".",".",".",".",".","."],
-                     [".",".",".",".",".",".",".",".",".","."],
-                     [".",".",".",".",".",".",".",".",".","."],
-                     [".",".",".",".",".",".",".",".",".","."],
-                     [".",".",".",".",".",".",".",".",".","."]]
+
+def determiner_taille_grille(nomfichier: str) -> list:
+    """
+    Détermine la taille exacte de la grille en fonction des coordonnées maximales trouvées dans le fichier.
+    """
+    max_x, max_y = 0, 0
+    
+    with open(nomfichier, "r") as fichier:
+        elements = fichier.readline().strip().split()
+        
+        for elem in elements:
+            if elem.startswith("C") or elem.startswith("P"):
+                parts = elem.split("_")
+                if len(parts) >= 3:
+                    x, y = int(parts[1]), int(parts[2])
+                    max_x = max(max_x, x)
+                    max_y = max(max_y, y)
+    
+    # Création d'une grille de la taille exacte détectée
+    return [["." for _ in range(max_y + 1)] for _ in range(max_x + 1)]
+
+
+
+baseAffichage = determiner_taille_grille("resSAT13.txt")
+
 def affichageNouvellePiece (pieces:list)->None:
     """
     permet l'affichage d'un nouvelle piece dans un fichier txt
