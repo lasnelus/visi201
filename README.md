@@ -13,7 +13,6 @@ Ce projet, réalisé dans le cadre du cours VISI201, explore le pavage de polyom
 - `piece.txt` : Fichier décrivant les polyominos utilisés (à détailler davantage).
 - `resSAT13.txt` : Résultats obtenus après résolution des clauses SAT. Par exemple, une ligne comme `P0_0_0 C_1_2 C_0_2 C_0_1 C_0_0` indique une solution spécifique.
 - `tab.txt` : Fichier contenant des informations tabulaires spécifiques (à détailler davantage).
-- `temp.txt` : Contient une fonction `version_piece` qui génère toutes les versions (rotations et symétries) d'une pièce donnée.
 
 *Remarque : Certaines descriptions de fichiers nécessitent des compléments d'information.*
 
