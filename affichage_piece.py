@@ -48,41 +48,37 @@ def determiner_taille_grille(nomfichier: str) -> list:
     """
     Détermine la taille exacte de la grille en fonction des coordonnées maximales trouvées dans le fichier.
     """
-    max_x, max_y = 0, 0
-    
-    with open(nomfichier, "r") as fichier:
-        elements = fichier.readline().strip().split()
+    max_x = 0
+    max_y = 0
+    fichier = open(nomfichier, "r")
+    elements = fichier.readline().strip().split()
         
-        for elem in elements:
-            if elem.startswith("C") or elem.startswith("P"):
-                parts = elem.split("_")
-                if len(parts) >= 3:
-                    x, y = int(parts[1]), int(parts[2])
-                    max_x = max(max_x, x)
-                    max_y = max(max_y, y)
-    
+    for elem in elements:
+        if elem.startswith("C"):
+            parts = elem.split("_")
+            x, y = int(parts[1]), int(parts[2])
+            max_x = max(max_x, x)
+            max_y = max(max_y, y)
+    fichier.close()
     # Création d'une grille de la taille exacte détectée
-    return [["." for _ in range(max_y + 1)] for _ in range(max_x + 1)]
+    return [["." for _ in range(max_x + 1)] for _ in range(max_y + 1)]
 
 
-
-baseAffichage = determiner_taille_grille("resSAT13.txt")
-
-def affichageNouvellePiece (pieces:list)->None:
+def affichageNouvellePiece(pieces: list) -> None:
     """
-    permet l'affichage d'un nouvelle piece dans un fichier txt
+    Permet l'affichage d'une nouvelle pièce dans un fichier txt.
     """
+    baseAffichage = determiner_taille_grille("resSAT13.txt") # Copie de la grille
 
+    lettres = "abcdefghijklmnopqrstuvwxyz"
     for i in range(len(pieces)):
-        lettres ="abcdefghijklmnopqrstuvwxyz"
         for j in range(len(pieces[i])):
-            baseAffichage[pieces[i][j][0]][pieces[i][j][1]] = lettres[i]
-
+            x, y = pieces[i][j]
+            baseAffichage[y][x] = lettres[i]  # Correction indices
 
     visualisation = open("piece.txt", "w")
     for ligne in baseAffichage:
         visualisation.write(" ".join(ligne) + "\n")
     visualisation.close()
-
 
 affichageNouvellePiece(recupere_list_coordonne("resSAT13.txt"))
