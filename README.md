@@ -20,6 +20,7 @@ Ce projet, réalisé dans le cadre du cours VISI201, explore le pavage de polyom
 ## Prérequis
 
 - Python 3.x
+- GCC (utilisation des fichier présent dans le repo, afin d'installer SAT13)
 
 ## Installation
 
@@ -27,3 +28,24 @@ Ce projet, réalisé dans le cadre du cours VISI201, explore le pavage de polyom
 
    ```bash
    git clone https://github.com/lasnelus/visi201.git
+
+2. Accédez au répertoire du projet :
+
+    ```bash
+    cd visi201
+
+## Utilisation
+1. Exécutez le module principal (non présent pour l'instant):
+    
+    ```bash
+    python module_principal.py
+
+2. Suivez les instructions affichées pour interagir avec le programme.
+
+
+## Auteur(s)
+
+- [lasnelus](https://github.com/lasnelus/)
+
+## License
+- la license n'est pas encore déterminé
