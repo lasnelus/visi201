@@ -6,16 +6,14 @@ from affichage_piece import display_pieces
 def main():
     # Étape 1 : Génération des clauses pour le solveur SAT
     clauses_file = 'clauses.sat'
-    generate_clauses(clauses_file)
+    generate_clauses(lecteur_tab("tab.txt"))
     print(f"Clauses générées et sauvegardées dans {clauses_file}")
-
     # Étape 2 : Exécution du solveur SAT sur les clauses générées
-    results_file = 'resSAT13.txt'
-    ecriture_fichier()
-    print(f"Résultats du solveur SAT sauvegardés dans {results_file}")
+    ecriture_fichier("resSAT13.txt")
+    print(f"Résultats du solveur SAT sauvegardés dans resSAT13")
 
     # Étape 3 : Affichage des pièces à partir des résultats
-    display_pieces(results_file)
+    affichageNouvellePiece(recupere_list_coordonne("resSAT13.txt"))
     print(f"Affichage des pièces basé sur {results_file}")
 
 if __name__ == "__main__":
