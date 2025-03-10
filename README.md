@@ -44,7 +44,7 @@ Ce projet, réalisé dans le cadre du cours VISI201, explore le pavage de polyom
 
 ## Auteur(s)
 
-- [lasnelus](https://github.com/lasnelus/)
+- [Etienne MALABRE](https://github.com/lasnelus/)
 
 ## License
 - la license n'est pas encore déterminé
