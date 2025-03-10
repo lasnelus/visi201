@@ -19,11 +19,18 @@ def recup_pieces (nomfichier:str)->list:
     fichier.close()
     return tab
 
-def recuperation_origine (piece:str)->list:
+import re
+
+def recuperation_origine(piece: str) -> list:
     """
-    permet de connaitre l'origine d'une piece placé
+    Extrait les coordonnées X et Y d'une pièce sous la forme 'PV_X_Y'.
+    Gère les nombres de plusieurs chiffres et les valeurs négatives.
     """
-    return [int(piece[3]), int(piece [5])]
+    match = re.match(r'P\d+_(-?\d+)_(-?\d+)', piece)  # Capture X et Y
+
+    if match:
+        x, y = int(match.group(1)), int(match.group(2))
+        return [x, y]
 
 def recuperation_version (piece:str)->int:
     """
