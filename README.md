@@ -48,3 +48,8 @@ Ce projet, réalisé dans le cadre du cours VISI201, explore le pavage de polyom
 
 ## License
 - la license n'est pas encore déterminé
+
+
+<!--START_WAKATIME-->
+🕒 Temps passé sur ce projet : Chargement...
+<!--END_WAKATIME-->
