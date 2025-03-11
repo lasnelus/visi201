@@ -34,17 +34,17 @@ Ce projet, réalisé dans le cadre du cours VISI201, explore le pavage de polyom
     cd visi201
 
 ## Utilisation
-1. Exécutez le module principal (non présent pour l'instant):
+1. Exécutez le module principal, main.py:
     
     ```bash
-    python module_principal.py
+    python main.py
 
 2. Suivez les instructions affichées pour interagir avec le programme.
 
 
 ## Auteur(s)
 
-- [lasnelus](https://github.com/lasnelus/)
+- [Etienne MALABRE](https://github.com/lasnelus/)
 
 ## License
 - la license n'est pas encore déterminé
