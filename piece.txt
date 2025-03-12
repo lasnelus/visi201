@@ -1,8 +1,8 @@
-. . . . . . . . h g . . . .
-. . . . . . i i h g g g . .
-. . . . n n i j h h c b b b
-. . . . m n i j j j c c c b
-. . . . m n l k k k d a a a
-. . . . m m l k f e d d d a
-. . . . . . l l f e e e . .
-. . . . . . . . f f . . . .
+. . . . . . . . f f . . . . . . . .
+. . . . . . e e e f k j . . . . . .
+. . . . b c c c e f k j j j . . . .
+. . . . b b b c i l k k n n . . . .
+. . . . a d d d i l l l m n . . . .
+. . . . a a a d i i m m m n . . . .
+. . . . . . g g g h h h . . . . . .
+. . . . . . . . g h . . . . . . . .

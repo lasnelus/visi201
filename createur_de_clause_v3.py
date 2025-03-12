@@ -168,13 +168,6 @@ def ecriture_clause (clause: str)-> None:
 
 tab = lecteur_tab("tab.txt")
 
-ecriture_clause(
-    creation_clause_tab(piece, tab) +
-    creation_clause_complet(tab) +
-    creation_contrainte_unicite(tab, piece) +
-    creation_contrainte_couverture(tab, piece)
-)
-
 def generates_clauses(piece, tab):
     """
     génère toutes les clauses

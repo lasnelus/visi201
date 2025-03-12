@@ -1,8 +1,8 @@
 import os
-from createur_de_clause_v3 import generate_clauses
-from conv_res import execSAT13
-from affichage_piece import display_pieces
-
+from createur_de_clause_v3 import generates_clauses, piece, tab
+from conv_res import ecriture_fichier
+from affichage_piece import affichageNouvellePiece, recupere_list_coordonne
+"""
 def main():
     # Étape 1 : Génération des clauses pour le solveur SAT
     clauses_file = 'clauses.sat'
@@ -18,3 +18,12 @@ def main():
 
 if __name__ == "__main__":
     main()
+"""
+
+def full_exec ():
+    generates_clauses(piece, tab)
+    ecriture_fichier("clausepavage.txt")
+    affichageNouvellePiece(recupere_list_coordonne("resSAT13.txt"))
+    
+    
+full_exec()
