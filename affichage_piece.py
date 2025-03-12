@@ -75,13 +75,13 @@ def affichageNouvellePiece(pieces: list) -> None:
     """
     Permet l'affichage d'une nouvelle pièce dans un fichier txt.
     """
-    baseAffichage = determiner_taille_grille("resSAT13.txt") # Copie de la grille
+    baseAffichage = determiner_taille_grille("resSAT13.txt")
 
     lettres = "abcdefghijklmnopqrstuvwxyz"
     for i in range(len(pieces)):
         for j in range(len(pieces[i])):
             x, y = pieces[i][j]
-            baseAffichage[y][x] = lettres[i]  # Correction indices
+            baseAffichage[y][x] = lettres[i]
 
     visualisation = open("piece.txt", "w")
     for ligne in baseAffichage:

@@ -20,5 +20,5 @@ def symetriePiece(piece: list) -> list:
     """
     Applique une symétrie verticale à la pièce
     """
-    return [[x, -y] for x, y in piece]
+    return [[-x, y] for x, y in piece]
 
