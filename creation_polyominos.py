@@ -11,7 +11,7 @@ def rotationPiece(piece: list) -> list:
 
     min_x = min(x for x, y in nouvellePiece)
     min_y = min(y for x, y in nouvellePiece)
-    
+
     return [[x - min_x, y - min_y] for x, y in nouvellePiece]
 
 def symetriePiece(piece: list) -> list:
