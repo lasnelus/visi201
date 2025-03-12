@@ -7,18 +7,21 @@ def rotationPiece(piece: list) -> list:
     """
     Rotation de 90° vers la droite d'un polyomino
     """
-    nouvellePiece = [[-y, x] for x, y in piece]  # Rotation mathématique correcte
+    nouvellePiece = [[-y, x] for x, y in piece]
 
-    # Trouver les nouvelles coordonnées minimales pour recentrer
     min_x = min(x for x, y in nouvellePiece)
     min_y = min(y for x, y in nouvellePiece)
-
-    # Décaler pour que les coordonnées restent positives
+    
     return [[x - min_x, y - min_y] for x, y in nouvellePiece]
 
 def symetriePiece(piece: list) -> list:
     """
     Applique une symétrie verticale à la pièce
     """
-    return [[-x, y] for x, y in piece]
+    nouvellePiece = [[-x, y] for x, y in piece]
+
+    min_x = min(x for x, y in nouvellePiece)
+    min_y = min(y for x, y in nouvellePiece)
+
+    return [[x - min_x, y - min_y] for x, y in nouvellePiece]
 
