@@ -89,3 +89,8 @@ def affichageNouvellePiece(pieces: list) -> None:
     visualisation.close()
 
 affichageNouvellePiece(recupere_list_coordonne("resSAT13.txt"))
+
+
+
+### TEST ###
+# assert(recup_pieces("piecetest.txt")==["P0_16_5", "P6_6_4," "P4_8_7", "P1_9_6", "P0_4_3", "P4_6_5", "P2_4_2", "P1_6_1", "P2_8_0", "P2_7_2", "P7_9_3", "P3_10_4", "P2_12_3", "P1_11_2", "P4_10_3"]), "problème recup_piece"
