@@ -76,12 +76,18 @@ def affichageNouvellePiece(pieces: list) -> None:
     Permet l'affichage d'une nouvelle pièce dans un fichier txt.
     """
     baseAffichage = determiner_taille_grille("resSAT13.txt")
-
+    print(len(baseAffichage))
+    print(len(baseAffichage[0]))
+    
     lettres = "abcdefghijklmnopqrstuvwxyz"
     for i in range(len(pieces)):
         for j in range(len(pieces[i])):
             x, y = pieces[i][j]
-            baseAffichage[y][x] = lettres[i]
+            print([x, y])
+            if 0 <= y< len(baseAffichage) and 0 <= x < len(baseAffichage[0]):
+                baseAffichage[y][x] = lettres[i]
+            else:
+                print(f"Coordonnées hors limites: ({y}, {x})")
 
     visualisation = open("piece.txt", "w")
     for ligne in baseAffichage:
@@ -93,4 +99,7 @@ affichageNouvellePiece(recupere_list_coordonne("resSAT13.txt"))
 
 
 ### TEST ###
-# assert(recup_pieces("piecetest.txt")==["P0_16_5", "P6_6_4," "P4_8_7", "P1_9_6", "P0_4_3", "P4_6_5", "P2_4_2", "P1_6_1", "P2_8_0", "P2_7_2", "P7_9_3", "P3_10_4", "P2_12_3", "P1_11_2", "P4_10_3"]), "problème recup_piece"
+assert(recup_pieces("piecetest.txt")==['P0_16_5', 'P6_6_4', 'P4_8_7', 'P1_9_6', 'P0_4_3', 'P4_6_5', 'P2_4_2', 'P1_6_1', 'P2_8_0', 'P2_7_2', 'P7_9_3', 'P3_10_4', 'P2_12_3', 'P1_11_2', 'P4_10_3']), "problème recup_piece"
+assert(recuperation_origine("P0_16_5")==[16,5]),"pb recupération origine"
+assert(recuperation_version("P0_16_5")==0),"pb recupération version"
+assert(recupere_list_coordonne("piecetest.txt")==[[[16, 5], [16, 6], [16, 7], [17, 7]], [[6, 6], [6, 5], [6, 4], [7, 4]], [[9, 7], [9, 8], [9, 9], [8, 9]], [[11, 6], [10, 6], [9, 6], [9, 7]], [[4, 3], [4, 4], [4, 5], [5, 5]], [[7, 5], [7, 6], [7, 7], [6, 7]], [[5, 4], [5, 3], [5, 2], [4, 2]], [[8, 1], [7, 1], [6, 1], [6, 2]], [[9, 2], [9, 1], [9, 0], [8, 0]], [[8, 4], [8, 3], [8, 2], [7, 2]], [[9, 3], [10, 3], [11, 3], [11, 4]], [[10, 5], [11, 5], [12, 5], [12, 4]], [[13, 5], [13, 4], [13, 3], [12, 3]], [[13, 2], [12, 2], [11, 2], [11, 3]], [[11, 3], [11, 4], [11, 5], [10, 5]]]), "pb recupère liste coordonnée"
