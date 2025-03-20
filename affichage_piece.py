@@ -1,6 +1,7 @@
 #affichage piece
 #lasnelus
 
+import string
 from createur_de_clause_v3 import piece, version_piece, placement_piece
 
 
@@ -76,16 +77,13 @@ def affichageNouvellePiece(pieces: list) -> None:
     Permet l'affichage d'une nouvelle pièce dans un fichier txt.
     """
     baseAffichage = determiner_taille_grille("resSAT13.txt")
-    print(len(baseAffichage))
-    print(len(baseAffichage[0]))
     
-    lettres = "abcdefghijklmnopqrstuvwxyz"
+    lettres = string.ascii_lowercase + string.ascii_uppercase
     for i in range(len(pieces)):
         for j in range(len(pieces[i])):
             x, y = pieces[i][j]
-            print([x, y])
             if 0 <= y< len(baseAffichage) and 0 <= x < len(baseAffichage[0]):
-                baseAffichage[y][x] = lettres[i]
+                baseAffichage[y][x] = lettres[i % len(lettres)]
             else:
                 print(f"Coordonnées hors limites: ({y}, {x})")
 
