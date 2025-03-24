@@ -1,24 +1,8 @@
-u u u v w w P P P Q Q Q U V V W X X X J I I I G G G z z z y y y
-u v v v w s s O P Q M M U V T W W W X J I H H H F G z w w w x y
-q r r r w t s O N N M U U V T T T c c J J t t H F F F w x x x A
-q r p t t t s O O N M R S S S J J c d d d e t s s v v C B B B A
-q q p p p z y y y N k R S P P P J c d e e e t s r v u C B D A A
-o m m m n z y F F F k R R P D D J E L L g g g s r v u C C D D D
-o m n n n z z F G k k l l l D E E E L f g h h r r u u E E E q q
-o o O E E E G G G J J J m l D F F F L f f f h i i i b b b E q p
-N N O E B C C I I I K J m m m F K K Z Z Y Y h i G G b K o o q p
-P N O O B C D D D I K K K C C C K a a Z Y I I I G K K K I o p p
-P N H B B C D j j k k x x x A C K q a Z Y G G I G H I I I o n n
-P P H H H l l l j k i x A A A q q q a B B G H H H H J J R R R n
-L L L M M l R R j k i h h p p p s r r r B G H o H H J N R m m n
-V V L M Q Q Q R u u i i h p s s s r w u B o o o p t J N N N m l
-V U U M T S Q R u t t t h f y y z z w u u u p p p t L M M M m l
-V U T T T S S S u t g f f f y x z w w v q q q n t t L L L M l l
-W U Y Y Y Z n o o o g g g F y x z v v v r s q n l l k k j j j k
-W W W a Y Z n n n o e F F F x x v C r r r s m n n l k j j k k k
-b b b a Z Z i i j j e e e d v v v C C C s s m m m l k j A A A e
-b X a a f g i h j D E E E d c c B B B w w w U a a a i j j f A e
-c X f f f g i h j D E y d d a c Z x B w U U U T T a i i i f e e
-c X X e e g g h h D D y y y a c Z x x x V V V S T g g g c f f d
-c c d e O Q Q Q z z z A b a a Z Z Y X X X W V S T g h b c c c d
-d d d e O O O Q z A A A b b b Y Y Y X W W W S S h h h b b b d d
+. . . . . . a a . . . .
+. . . . k k a m n n . .
+. . j j j k a m l n d d
+. . i i j k m m l n e d
+. . i h g g g l l c e d
+. . i h h h g b b c e e
+. . . . f f f b c c . .
+. . . . . . f b . . . .

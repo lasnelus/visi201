@@ -22,7 +22,9 @@ if __name__ == "__main__":
 
 def full_exec ():
     generates_clauses(piece, tab)
+    print("clauses générées")
     ecriture_fichier("clausepavage.txt")
+    print("écriture finit")
     affichageNouvellePiece(recupere_list_coordonne("resSAT13.txt"))
     
     
