@@ -58,20 +58,18 @@ def version_piece (piece: list)-> list:
         rotationPiece(rotationPiece(symetriePiece(piece))),
         rotationPiece(rotationPiece(rotationPiece(symetriePiece(piece))))
     ]
-
     return versionpiece
 
+    
 def verif_version(origine: list, pieces: list, tab: list) -> list:
     """
     Vérifie les versions valides pour chaque origine et conserve leurs indices d'origine.
     """
     res = []
-    
     for i, version in enumerate(pieces):  # On conserve l'index d'origine
         version_placee = placement_piece(origine, version)
-        if all([dx, dy] in tab for dx, dy in version_placee):  # Vérifie si toutes les cases sont valides
+        if all(case in tab for case in version_placee):
             res.append((i, version_placee))  # On stocke l'index original et la version placée
-    
     return res
 
 
@@ -178,3 +176,4 @@ def generates_clauses(piece, tab):
     creation_contrainte_unicite(tab, piece) +
     creation_contrainte_couverture(tab, piece)
     )
+generates_clauses(piece, tab)
