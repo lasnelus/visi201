@@ -70,37 +70,35 @@ def affichageNouvellePiece(pieces: list, tab) -> None:
     """
     Permet l'affichage d'une nouvelle pièce dans un fichier txt.
     """
-    coords = recupere_list_coordonne("resSAT13.txt")
-    width, height = max(x for piece in coords for x,y in piece)+1, max(y for piece in coords for x,y in piece)+1
-    size = 50 #taille des cases
-    
-    tableau = [[0 for _ in range(width)] for _ in range(height)]
-    
-    for i in range(len(pieces)):
-        for j in range(len(pieces[i])):
-            x, y = pieces[i][j]
-            if 0 <= y< height and 0 <= x < width:
-                tableau[y][x] = colors[(i % (len(colors)-1))+1]
-            else:
-                print(f"Coordonnées hors limites: ({y}, {x})")
+    if pieces!= []:
+        coords = recupere_list_coordonne("resSAT13.txt")
+        width, height = max(x for piece in coords for x,y in piece)+1, max(y for piece in coords for x,y in piece)+1
+        size = 50 #taille des cases
+        
+        tableau = [[0 for _ in range(width)] for _ in range(height)]
+        
+        for i in range(len(pieces)):
+            for j in range(len(pieces[i])):
+                x, y = pieces[i][j]
+                if 0 <= y< height and 0 <= x < width:
+                    tableau[y][x] = colors[(i % (len(colors)-1))+1]
+                else:
+                    print(f"Coordonnées hors limites: ({y}, {x})")
 
-    img = Image.new("RGB", (width*50, height*50), (255,255,255))
+        img = Image.new("RGB", (width*50, height*50), (255,255,255))
 
-    
-    for y in range(height):
-        for x in range(width):
-            color = tableau[y][x]
-            if color != (255, 255, 255):
-                for dy in range(size):
-                    for dx in range(size):
-                        img.putpixel(((x *size)+dx, y*size +dy), color)
+        
+        for y in range(height):
+            for x in range(width):
+                color = tableau[y][x]
+                if color != (255, 255, 255):
+                    for dy in range(size):
+                        for dx in range(size):
+                            img.putpixel(((x *size)+dx, y*size +dy), color)
 
-            
-    print([width, height])
-    img.show()
-    img.save("grille.png")
-
-affichageNouvellePiece(recupere_list_coordonne("resSAT13.txt"), tab)
-coords = recupere_list_coordonne("resSAT13.txt")
-print("Première pièce:", coords[0])
-print("Dimensions max:", max(x for piece in coords for x,y in piece), max(y for piece in coords for x,y in piece))
+                
+        print([width, height])
+        img.show()
+        img.save("grille.png")
+    else:
+        print("on a un pb captain")
