@@ -7,23 +7,23 @@ Ce projet, réalisé dans le cadre du cours VISI201, explore le pavage de polyom
 Contenu du projet
 Le répertoire contient les fichiers et dossiers suivants :
 
-affichage_piece.py : Fonctions pour afficher des polyominos sous forme de lettres dans un tableau de taille fixe.​
+ - affichage_piece.py : Fonctions pour afficher des polyominos sous forme de lettres dans un tableau de taille fixe.​
 
-conv_res.py : Comprend la fonction execSAT13 pour exécuter le solveur SAT et traiter les résultats.​
+ - conv_res.py : Comprend la fonction execSAT13 pour exécuter le solveur SAT et traiter les résultats.​
 
-createur_de_clause_v3.py : Génère les clauses logiques nécessaires pour le solveur SAT en fonction des polyominos et de la grille spécifiée.​
+ - createur_de_clause_v3.py : Génère les clauses logiques nécessaires pour le solveur SAT en fonction des polyominos et de la grille spécifiée.​
 
-creation_polyominos.py : Contient des définitions et des transformations de polyominos, y compris des fonctions pour la rotation et la symétrie.​
+ - creation_polyominos.py : Contient des définitions et des transformations de polyominos, y compris des fonctions pour la rotation et la symétrie.​
 
-main.py : Point d'entrée principal du projet, coordonne la génération des clauses, l'exécution du solveur SAT et l'affichage des résultats.​
+ - main.py : Point d'entrée principal du projet, coordonne la génération des clauses, l'exécution du solveur SAT et l'affichage des résultats.​
 
-tab.txt : Fichier de configuration définissant la grille de pavage, où chaque cellule utilisable est marquée par un #.​
+ - tab.txt : Fichier de configuration définissant la grille de pavage, où chaque cellule utilisable est marquée par un #.​
 
-piece.txt, piecetest.txt : Fichiers contenant des définitions de polyominos utilisés pour le pavage.​
+ - piece.txt, piecetest.txt : Fichiers contenant des définitions de polyominos utilisés pour le pavage.​
 
-resSAT13.txt : Fichier généré contenant les résultats de l'exécution du solveur SAT.​
+ - resSAT13.txt : Fichier généré contenant les résultats de l'exécution du solveur SAT.​
 
-clausepavage.txt : Fichier généré contenant les clauses logiques pour le solveur SAT.​
+ - clausepavage.txt : Fichier généré contenant les clauses logiques pour le solveur SAT.​
 
 
 
