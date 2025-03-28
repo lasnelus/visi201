@@ -68,7 +68,6 @@ Alternativement, vous pouvez exécuter le script principal main.py qui orchestre
 Exemple d'exécution
 Voici un exemple de la manière d'exécuter le projet en ligne de commande :​
 
-    ```
     python main.py
 
 Assurez-vous que les fichiers de configuration (tab.txt, piece.txt, etc.) sont correctement définis avant d'exécuter le script.
