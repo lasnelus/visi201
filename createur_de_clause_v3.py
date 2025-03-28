@@ -33,11 +33,8 @@ def placement_piece (origine: list, piece: list)->list:
     """
     donne une list correspondant à une piece placé celon une origine donnée
     """
-    res=[]
-    for case in piece:
-        res.append([case[0]+origine[0], case[1]+origine[1]])
+    return [[case[0] + origine[0], case[1] + origine[1]] for case in piece]
 
-    return res
 
 assert(placement_piece([0,0], [[0,0],[1,0],[2,0],[2,1]])==[[0,0],[1,0],[2,0],[2,1]])
 assert(placement_piece([1,0], [[0,0],[1,0],[2,0],[2,1]])==[[1,0],[2,0],[3,0],[3,1]])
@@ -62,14 +59,14 @@ def version_piece (piece: list)-> list:
 
     
 def verif_version(origine: list, pieces: list, tab: list) -> list:
-    """
-    Vérifie les versions valides pour chaque origine et conserve leurs indices d'origine.
-    """
     res = []
-    for i, version in enumerate(pieces):  # On conserve l'index d'origine
+    for i, version in enumerate(pieces):
         version_placee = placement_piece(origine, version)
+        print(f"Version {i} placée: {version_placee}")
         if all(case in tab for case in version_placee):
-            res.append((i, version_placee))  # On stocke l'index original et la version placée
+            res.append((i, version_placee))
+        else:
+            print(f"Échec pour version {i} à l'origine {origine}, certaines cases ne sont pas dans tab")
     return res
 
 
@@ -176,4 +173,6 @@ def generates_clauses(piece, tab):
     creation_contrainte_unicite(tab, piece) +
     creation_contrainte_couverture(tab, piece)
     )
-generates_clauses(piece, tab)
+
+
+print(tab)

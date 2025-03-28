@@ -4,17 +4,28 @@ Ce projet, réalisé dans le cadre du cours VISI201, explore le pavage de polyom
 
 ## Contenu du projet
 
-- `affichage_piece.py` : Contient une fonction permettant d'afficher des polyominos sous forme de lettres dans un tableau de taille fixe.
-- `conv_res.py` : Comprend la fonction `execSAT13` (description à compléter).
-- `createur_de_clause_v3.py` : Génère des clauses pour le solveur SAT en fonction des polyominos et du pavage souhaité.
-- `creation_polyominos.py` : Contient des fonctions pour créer et manipuler des polyominos, notamment la génération de toutes les versions (rotations et symétries) d'une pièce.
-- `formule_exemple_hyvernat.sat` : Fichier d'exemple contenant des formules SAT spécifiques (à détailler davantage).
-- `clausepavage.txt` : Fichier contenant les clauses générées pour le pavage (à détailler davantage).
-- `piece.txt` : Fichier décrivant les polyominos utilisés (à détailler davantage).
-- `resSAT13.txt` : Résultats obtenus après résolution des clauses SAT. Par exemple, une ligne comme `P0_0_0 C_1_2 C_0_2 C_0_1 C_0_0` indique une solution spécifique.
-- `tab.txt` : Fichier contenant des informations tabulaires spécifiques (à détailler davantage).
+Contenu du projet
+Le répertoire contient les fichiers et dossiers suivants :
 
-*Remarque : Certaines descriptions de fichiers nécessitent des compléments d'information.*
+affichage_piece.py : Fonctions pour afficher des polyominos sous forme de lettres dans un tableau de taille fixe.​
+
+conv_res.py : Comprend la fonction execSAT13 pour exécuter le solveur SAT et traiter les résultats.​
+
+createur_de_clause_v3.py : Génère les clauses logiques nécessaires pour le solveur SAT en fonction des polyominos et de la grille spécifiée.​
+
+creation_polyominos.py : Contient des définitions et des transformations de polyominos, y compris des fonctions pour la rotation et la symétrie.​
+
+main.py : Point d'entrée principal du projet, coordonne la génération des clauses, l'exécution du solveur SAT et l'affichage des résultats.​
+
+tab.txt : Fichier de configuration définissant la grille de pavage, où chaque cellule utilisable est marquée par un #.​
+
+piece.txt, piecetest.txt : Fichiers contenant des définitions de polyominos utilisés pour le pavage.​
+
+resSAT13.txt : Fichier généré contenant les résultats de l'exécution du solveur SAT.​
+
+clausepavage.txt : Fichier généré contenant les clauses logiques pour le solveur SAT.​
+
+
 
 ## Prérequis
 
@@ -33,14 +44,35 @@ Ce projet, réalisé dans le cadre du cours VISI201, explore le pavage de polyom
     ```bash
     cd visi201
 
-## Utilisation
-1. Exécutez le module principal, main.py:
-    
-    ```bash
-    python main.py
+Utilisation
+Préparation de la grille et des polyominos :
 
-2. Suivez les instructions affichées pour interagir avec le programme.
+Modifiez le fichier tab.txt pour définir la grille de pavage. Chaque cellule utilisable doit être marquée par un #.​
 
+Définissez les polyominos dans les fichiers piece.txt ou piecetest.txt selon vos besoins.​
+
+Génération des clauses logiques :
+
+Exécutez le script createur_de_clause_v3.py pour générer le fichier clausepavage.txt contenant les clauses logiques pour le solveur SAT.​
+
+Exécution du solveur SAT :
+
+Utilisez le script conv_res.py pour exécuter le solveur SAT sur les clauses générées et obtenir les résultats dans resSAT13.txt.​
+
+Visualisation des résultats :
+
+Lancez affichage_piece.py pour afficher graphiquement les solutions de pavage obtenues.​
+
+Alternativement, vous pouvez exécuter le script principal main.py qui orchestre ces étapes de manière séquentielle.​
+
+Exemple d'exécution
+Voici un exemple de la manière d'exécuter le projet en ligne de commande :​
+
+bash
+Copy
+Edit
+python main.py
+Assurez-vous que les fichiers de configuration (tab.txt, piece.txt, etc.) sont correctement définis avant d'exécuter le script.
 
 ## Auteur(s)
 

@@ -1,18 +1,20 @@
 #création polyominos
 #lasnelus
 
-L = [[0,0],[1,0],[2,0],[2,1]] #piece de tetris formant un L orienté vers la droite de 3 de haut, pour 2 de large
 
 def rotationPiece(piece: list) -> list:
     """
     Rotation de 90° vers la droite d'un polyomino
     """
-    nouvellePiece = [[-y, x] for x, y in piece]
+    nouvelle_piece = [[-y, x] for x, y in piece]
 
-    min_x = min(x for x, y in nouvellePiece)
-    min_y = min(y for x, y in nouvellePiece)
+    # Trouver les plus petites coordonnées pour recentrer la pièce à l'origine
+    min_x = min(x for x, y in nouvelle_piece)
+    min_y = min(y for x, y in nouvelle_piece)
 
-    return [[x - min_x, y - min_y] for x, y in nouvellePiece]
+    # Recentrer la pièce pour éviter des coordonnées négatives
+    return [[x - min_x, y - min_y] for x, y in nouvelle_piece]
+
 
 def symetriePiece(piece: list) -> list:
     """
