@@ -61,8 +61,6 @@ def verif_version(origine: list, pieces: list, tab: list) -> list:
         version_placee = placement_piece(origine, version)
         if all(tuple(case) in tab_set for case in version_placee):
             res.append((i, version_placee))
-        else:
-            print(f"Échec pour version {i} à l'origine {origine}, certaines cases ne sont pas dans tab")
 
     return res
 
@@ -119,32 +117,27 @@ def creation_contrainte_couverture(tab: list, piece: list) -> str:
     """
     Génère les clauses imposant que chaque case soit occupée par au moins une pièce.
     """
-    res = ""
+    clauses = []
     
     for case in tab:
         pieces = piece_couvrante(case, piece, tab)
-        if pieces:
-            res += " ".join(pieces) + "\n"  # CNF : Au moins une de ces pièces est présente
+        if pieces:  # seulement si des pièces couvrent cette case
+            clauses.append(" ".join(pieces))
     
-    return res
-
+    return "\n".join(clauses) + "\n" if clauses else ""
 
 def creation_clause_complet (tab:list)->str:
     """
     créé toutes les clauses pour que chaque case soit utilisé
     """
-    res=""
-    for case in tab:
-        res += "C_"+str(case[0])+"_"+str(case[1])+"\n"
-    return res
+    return "\n".join(f"C_{x}_{y}" for x, y in tab) + "\n" if tab else ""
 
 def ecriture_clause (clause: str)-> None:
     """
     écrit dans un fichier les clauses
     """
-    fichier = open("clausepavage.txt", "w")
-    fichier.write(clause)
-    fichier.close()
+    with open("clausepavage.txt", "w") as fichier:
+        fichier.write(clause)
 
 
 tab = lecteur_tab("tab.txt")
