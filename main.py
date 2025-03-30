@@ -9,7 +9,7 @@ def main():
     generate_clauses(lecteur_tab("tab.txt"))
     print(f"Clauses générées et sauvegardées dans {clauses_file}")
     # Étape 2 : Exécution du solveur SAT sur les clauses générées
-    ecriture_fichier("resSAT13.txt")
+    ecriture_fichier("resSAT13.txt")x
     print(f"Résultats du solveur SAT sauvegardés dans resSAT13")
 
     # Étape 3 : Affichage des pièces à partir des résultats
