@@ -2,30 +2,25 @@ from creation_polyominos import *
 
 piece = [[0,0],[0,1],[0,2],[1,2]]
 
-def lecteur_tab (file: str)-> list:
+def lecteur_tab(file: str) -> list:
     """
-    créé une liste correspondant à toute les cases utilisable
+    Crée une liste correspondant à toutes les cases utilisables.
     """
-    fichier = open(file, "r")
-    res=[]
-    ligne = fichier.readline()
-    i = 0
-    while ligne != "":
-        for j in range(len(ligne)):
-            ligne.strip()
-            if ligne[j] == "#":
-                res.append([j, i])
-        ligne = fichier.readline()
-        i+=1
+    res = []
+    
+    with open(file, "r") as fichier:  # Utilisation du gestionnaire de contexte
+        for i, ligne in enumerate(fichier):
+            for j, char in enumerate(ligne.strip()):
+                if char == "#":
+                    res.append([j, i])
     
     return res
 
-def trouve_origine (piece:list) -> list:
+def trouve_origine(piece: list) -> tuple:
     """
-    trouve le point en haut à gauche d'une pièce (sont origine)
+    Trouve le point en haut à gauche d'une pièce (son origine).
     """
-    x_origine = min(x for x, _ in piece)
-    y_origine = min(y for _, y in piece)
+    x_origine, y_origine = map(min, zip(*piece))
     return [x_origine, y_origine]
 
 
@@ -33,7 +28,8 @@ def placement_piece (origine: list, piece: list)->list:
     """
     donne une list correspondant à une piece placé celon une origine donnée
     """
-    return [[case[0] + origine[0], case[1] + origine[1]] for case in piece]
+    x0, y0 = origine
+    return [[x + x0, y + y0] for x, y in piece]
 
 
 assert(placement_piece([0,0], [[0,0],[1,0],[2,0],[2,1]])==[[0,0],[1,0],[2,0],[2,1]])
@@ -45,30 +41,30 @@ def version_piece (piece: list)-> list:
     """
     créer une liste de liste, où toute les versions la piece sont stocké
     """
-    versionpiece = [
-        piece,
-        rotationPiece(piece),
-        rotationPiece(rotationPiece(piece)),
-        rotationPiece(rotationPiece(rotationPiece(piece))),
-        symetriePiece(piece),
-        rotationPiece(symetriePiece(piece)),
-        rotationPiece(rotationPiece(symetriePiece(piece))),
-        rotationPiece(rotationPiece(rotationPiece(symetriePiece(piece))))
-    ]
+    versionpiece = [piece]
+    for _ in range(3):  # Génère 3 rotations supplémentaires
+        versionpiece.append(rotationPiece(versionpiece[-1]))
+    
+    sym = symetriePiece(piece)
+    versionpiece.append(sym)
+    for _ in range(3):  # Génère 3 rotations supplémentaires pour la symétrie
+        versionpiece.append(rotationPiece(versionpiece[-1]))
+
     return versionpiece
 
     
 def verif_version(origine: list, pieces: list, tab: list) -> list:
     res = []
+    tab_set = {tuple(case) for case in tab}  # Convertir les éléments de tab en tuples
+
     for i, version in enumerate(pieces):
         version_placee = placement_piece(origine, version)
-        print(f"Version {i} placée: {version_placee}")
-        if all(case in tab for case in version_placee):
+        if all(tuple(case) in tab_set for case in version_placee):
             res.append((i, version_placee))
         else:
             print(f"Échec pour version {i} à l'origine {origine}, certaines cases ne sont pas dans tab")
-    return res
 
+    return res
 
 
 def creation_clause_origine(origine: list, piece: list, tab: list) -> str:
@@ -78,38 +74,30 @@ def creation_clause_origine(origine: list, piece: list, tab: list) -> str:
     res = ""
     versions_valides = verif_version(origine, version_piece(piece), tab)
 
-    for index_original, version in versions_valides:  # On récupère l'index original
-        for case in version:
-            part1 = f"~P{index_original}_{origine[0]}_{origine[1]} "
-            part2 = f"C_{case[0]}_{case[1]}\n"
-            res += part1 + part2
-
-    return res
-
+    return "".join(
+        f"~P{index_original}_{origine[0]}_{origine[1]} C_{case[0]}_{case[1]}\n"
+        for index_original, version in versions_valides
+        for case in version
+    )
 
 
 def creation_clause_tab (piece:list, tab:list)->str:
     """
     créer les clauses pour la totalité du tableau
     """
-    res=""
-    for case in tab:
-        res += creation_clause_origine([case[0], case[1]], piece, tab)
-    return res
+    return "".join(creation_clause_origine([case[0], case[1]], piece, tab) for case in tab)
+
 
 def piece_couvrante(case: list, piece: list, tab: list) -> list:
     """
     Retourne la liste des identifiants des pièces pouvant recouvrir une case donnée.
     """
-    case_occupees = []
-    
-    for origine in tab:
-        versions_valides = verif_version(origine, version_piece(piece), tab)
-        for index_original, version in versions_valides:
-            if case in version:
-                case_occupees.append(f"P{index_original}_{origine[0]}_{origine[1]}")
-    
-    return case_occupees
+    return [
+        f"P{index_original}_{origine[0]}_{origine[1]}"
+        for origine in tab
+        for index_original, version in verif_version(origine, version_piece(piece), tab)
+        if case in version
+    ]
 
 
 
@@ -119,15 +107,13 @@ def creation_contrainte_unicite(tab: list, piece: list) -> str:
     """
     res = ""
     
-    for case in tab:
-        pieces = piece_couvrante(case, piece, tab)
-        if len(pieces) > 1:  # S'il y a au moins deux pièces, on impose des contraintes
-            for i in range(len(pieces)):
-                for j in range(i + 1, len(pieces)):
-                    res += f"~{pieces[i]} ~{pieces[j]}\n"  # Pas deux pièces sur la même case
-    
-    return res
-
+    return "".join(
+        f"~{pieces[i]} ~{pieces[j]}\n"
+        for case in tab
+        if (pieces := piece_couvrante(case, piece, tab)) and len(pieces) > 1
+        for i in range(len(pieces))
+        for j in range(i + 1, len(pieces))
+    )
 
 def creation_contrainte_couverture(tab: list, piece: list) -> str:
     """
@@ -173,6 +159,3 @@ def generates_clauses(piece, tab):
     creation_contrainte_unicite(tab, piece) +
     creation_contrainte_couverture(tab, piece)
     )
-
-
-print(tab)
