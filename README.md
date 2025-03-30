@@ -47,21 +47,21 @@ Le répertoire contient les fichiers et dossiers suivants :
 Utilisation
 1. Préparation de la grille et des polyominos :
 
- - Modifiez le fichier tab.txt pour définir la grille de pavage. Chaque cellule utilisable doit être marquée par un #.​
+     - Modifiez le fichier tab.txt pour définir la grille de pavage. Chaque cellule utilisable doit être marquée par un #.​
 
- - Définissez les polyominos dans les fichiers piece.txt ou piecetest.txt selon vos besoins.​
+     - Définissez les polyominos dans les fichiers piece.txt ou piecetest.txt selon vos besoins.​
 
 2. Génération des clauses logiques :
 
- - Exécutez le script createur_de_clause_v3.py pour générer le fichier clausepavage.txt contenant les clauses logiques pour le solveur SAT.​
+     - Exécutez le script createur_de_clause_v3.py pour générer le fichier clausepavage.txt contenant les clauses logiques pour le solveur SAT.​
 
 3. Exécution du solveur SAT :
 
- - Utilisez le script conv_res.py pour exécuter le solveur SAT sur les clauses générées et obtenir les résultats dans resSAT13.txt.​
+     - Utilisez le script conv_res.py pour exécuter le solveur SAT sur les clauses générées et obtenir les résultats dans resSAT13.txt.​
 
 4. Visualisation des résultats :
 
- - Lancez affichage_piece.py ou visualisation.py pour afficher graphiquement les solutions de pavage obtenues.​
+     - Lancez affichage_piece.py ou visualisation.py pour afficher graphiquement les solutions de pavage obtenues.​
 
 Alternativement, vous pouvez exécuter le script principal main.py qui orchestre ces étapes de manière séquentielle.​
 
