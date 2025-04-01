@@ -1,7 +1,5 @@
 from creation_polyominos import *
 
-piece = [[0,0],[0,1],[0,2],[1,2]]
-
 def lecteur_tab(file: str) -> list:
     """
     Crée une liste correspondant à toutes les cases utilisables.
@@ -56,7 +54,7 @@ def version_piece (piece: list)-> list:
 def verif_version(origine: list, pieces: list, tab: list) -> list:
     res = []
     tab_set = {tuple(case) for case in tab}  # Convertir les éléments de tab en tuples
-
+    
     for i, version in enumerate(pieces):
         version_placee = placement_piece(origine, version)
         if all(tuple(case) in tab_set for case in version_placee):

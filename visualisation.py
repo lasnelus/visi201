@@ -2,7 +2,7 @@
 # MISPI 11/CMI
 from PIL import Image
 import string
-from createur_de_clause_v3 import piece, version_piece, placement_piece, tab
+from createur_de_clause_v3 import version_piece, placement_piece, tab
 
 colors = {
     0: (255, 255, 255),   # Blanc
@@ -53,7 +53,7 @@ def recuperation_version (piece:str)->int:
     """
     return int(piece[1])
 
-def recupere_list_coordonne (nomfichier):
+def recupere_list_coordonne (nomfichier, piece):
     """
     permet de récupérer une liste de coordonnee, correspondant au piece placé par SAT13:
     """
@@ -67,12 +67,12 @@ def recupere_list_coordonne (nomfichier):
     return tab
 
 
-def affichageNouvellePiece(pieces: list, tab) -> None:
+def affichageNouvellePiece(pieces: list, tab, piece) -> None:
     """
     Permet l'affichage d'une nouvelle pièce dans un fichier txt.
     """
     if pieces != []:
-        coords = recupere_list_coordonne("resSAT13.txt")
+        coords = recupere_list_coordonne("resSAT13.txt", piece)
         width, height = max(x for piece in coords for x,y in piece)+1, max(y for piece in coords for x,y in piece)+1
         size = 50  # taille des cases
         border_size = 2  # épaisseur des bordures
