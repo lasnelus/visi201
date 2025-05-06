@@ -1,10 +1,10 @@
 import os
-from createur_de_clause_v3 import generates_clauses, tab
+from createur_de_clause_v3 import generates_clauses, tab, grille
 from conv_res import ecriture_fichier
 from visualisation import affichageNouvellePiece, recupere_list_coordonne
 
 
-piece = [[1,0], [0,1],[1,1],[2,1],[1,2]]
+piece = [[2,0],[0,1],[1,1],[2,1]]
 
 """
 def main():
@@ -25,7 +25,7 @@ if __name__ == "__main__":
 """
 
 def full_exec ():
-    generates_clauses(piece, tab)
+    generates_clauses(piece, grille, tab)
     print("clauses générées")
     ecriture_fichier("clausepavage.txt")
     print("écriture finit")
